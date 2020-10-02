@@ -9,28 +9,19 @@ def get_sortable_collection():
 
 def process_args():
     pass
-    #parser = argparse.ArgumentParser() 
-
-    #parser.add_argument("input-file", help="file to sort")
-
-    #args = parser.parse_args()
-    #return GenerationConfig(int(args.count), int(args.max), int(args.min)) 
 
 def sort(sortable_collection):
-
     length = len(sortable_collection.data)
+    for i in range(1, length):
+        item_index = i
 
-    sorted = False
-    iteration = 0
-    while not sorted:
-        iteration += 1
-        print("Iteration {}".format(iteration))
-        sorted = True
-        for i in range(length - 1):
-            j = i + 1
-            if sortable_collection.compare(i, j) > 0:
-                sortable_collection.swap(i, j)
-                sorted = False
+        for j in range(i - 1, -1, -1):
+            if sortable_collection.compare(item_index, j) < 0:
+                sortable_collection.swap(item_index, j)
+                item_index -= 1
+            else:
+                break
+
     return sortable_collection
     
 def main():
@@ -46,3 +37,4 @@ def main():
 
 if __name__ == '__main__':
     main()
+
